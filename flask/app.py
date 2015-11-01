@@ -919,6 +919,37 @@ class Flask(_PackageBoundObject):
         """
         return self.session_interface.save_session(self, session, response)
 
+    def regenerate_session(self, session, response):
+        """Regenerate the session if it is session id based.  For the default
+        implementation, this is a noop.  Instead of overriding this
+        method we recommend replacing the :class:`session_interface`.
+
+        This should be used upon login to prevent session fixation.
+
+        https://www.owasp.org/index.php/Session_fixation
+
+        :param session: the session to be saved (a
+                        :class:`~werkzeug.contrib.securecookie.SecureCookie`
+                        object)
+        :param response: an instance of :attr:`response_class`
+        """
+        return self.session_interface.regenerate_session(self, session, response)
+
+    def destroy_session(self, session, response):
+        """Destroy the session.  Instead of overriding this
+        method we recommend replacing the :class:`session_interface`.
+
+        This should be used upon logout to prevent session fixation.
+
+        https://www.owasp.org/index.php/Session_fixation
+
+        :param session: the session to be saved (a
+                        :class:`~werkzeug.contrib.securecookie.SecureCookie`
+                        object)
+        :param response: an instance of :attr:`response_class`
+        """
+        return self.session_interface.destroy_session(self, session, response)
+
     def make_null_session(self):
         """Creates a new instance of a missing session.  Instead of overriding
         this method we recommend replacing the :class:`session_interface`.
