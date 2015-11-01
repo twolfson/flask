@@ -919,7 +919,7 @@ class Flask(_PackageBoundObject):
         """
         return self.session_interface.save_session(self, session, response)
 
-    def regenerate_session(self, session, response):
+    def regenerate_session(self, session):
         """Regenerate the session if it is session id based.  For the default
         implementation, this is a noop.  Instead of overriding this
         method we recommend replacing the :class:`session_interface`.
@@ -934,7 +934,7 @@ class Flask(_PackageBoundObject):
         """
         return self.session_interface.regenerate_session(self, session)
 
-    def destroy_session(self, session, response):
+    def destroy_session(self, session):
         """Destroy the session.  Instead of overriding this
         method we recommend replacing the :class:`session_interface`.
 
