@@ -931,9 +931,8 @@ class Flask(_PackageBoundObject):
         :param session: the session to be saved (a
                         :class:`~werkzeug.contrib.securecookie.SecureCookie`
                         object)
-        :param response: an instance of :attr:`response_class`
         """
-        return self.session_interface.regenerate_session(self, session, response)
+        return self.session_interface.regenerate_session(self, session)
 
     def destroy_session(self, session, response):
         """Destroy the session.  Instead of overriding this
@@ -946,9 +945,8 @@ class Flask(_PackageBoundObject):
         :param session: the session to be saved (a
                         :class:`~werkzeug.contrib.securecookie.SecureCookie`
                         object)
-        :param response: an instance of :attr:`response_class`
         """
-        return self.session_interface.destroy_session(self, session, response)
+        return self.session_interface.destroy_session(self, session)
 
     def make_null_session(self):
         """Creates a new instance of a missing session.  Instead of overriding
