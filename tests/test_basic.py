@@ -503,8 +503,9 @@ def test_session_cookie_destroy():
     assert c.get('/get').data == b'42'
 
     # Destroy the session, verify we set up the session for destruction, and verify the value no longer exists
-    assert c.post('/destroy').data == b'destroyed session'
-    # TODO: Assert `Set-Cookie: Max-Age: 0`
+    rv = c.post('/destroy')
+    assert rv.data == b'destroyed session'
+    assert 'max-age=0' in rv.headers['Set-Cookie'].lower()
     assert c.get('/get').data == b''
 
 
