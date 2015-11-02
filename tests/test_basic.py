@@ -465,7 +465,7 @@ def test_session_cookie_regenerate():
 
     @app.route('/regenerate', methods=['POST'])
     def regenerate():
-        app.regenerate_session(session)
+        app.regenerate_session(flask.session)
         return 'regenerated session'
 
     # Set/get a value in our session
